@@ -5,17 +5,17 @@ services:
   samba:
     image: dperson/samba # no hay tag con versiones, solo latest
     restart: always
-    command: '-u "pi;password" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
+    command: '-u "detallitos;123456" -s "media;/media;yes;no" -s "downloads;/downloads;yes;no"'
     stdin_open: true
     tty: true
     environment:
-      - TZ=America/Argentina/Mendoza
+      - TZ=America/Peru/Lima
     ports:
       - 139:139
       - 445:445
     volumes:
-      - ${MEDIA}:/media
-      - ${STORAGE}/torrents:/downloads
+      - /mnt/Disco2/media:/media
+      - /mnt/Disco2/torrents:/downloads
 
   plex:
     image: jaymoulin/plex:1.30.1.6562
@@ -27,11 +27,11 @@ services:
     #  - 32400:32400
     #  - 33400:33400
     environment:
-      - TZ=America/Argentina/Mendoza
+      - TZ=America/Peru/Lima
     volumes:
-      - ${STORAGE}/Plex Media Server:/root/Library/Application Support/Plex Media Server
-      - ${MEDIA}:/media
-      - ${STORAGE}/tmp:/tmp
+      - /mnt/Disco2/Plex Media Server:/root/Library/Application Support/Plex Media Server
+      - /mnt/Disco2/media:/media
+      - /mnt/Disco2/tmp:/tmp
     restart: unless-stopped
     network_mode: "host" # Solo funciona en Linux
 
@@ -40,7 +40,7 @@ services:
     command: transmission-daemon -f -g /config
     volumes:
       - ./transmission:/config
-      - ${STORAGE}/torrents:/downloads
+      - /mnt/Disco2/torrents:/downloads
     ports:
       - 9091:9091
       - 51413:51413
@@ -54,8 +54,8 @@ services:
     volumes:
       - ./flexget:/config
       - ./flexget/custom-cont-init.d:/custom-cont-init.d
-      - ${STORAGE}/torrents:/downloads
-      - ${MEDIA}:/storage
+      - /mnt/Disco2/torrents:/downloads
+      - /mnt/Disco2/media:/storage
     ports:
       - 5050:5050
     environment:
