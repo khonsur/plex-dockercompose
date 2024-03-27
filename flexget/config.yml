@@ -17,7 +17,6 @@ templates:
           propers: 12 hours
           quality: 720p
       tv:
-      - Black Mirror
       - Brooklyn Nine-Nine
       - Homeland
       - Luther
@@ -29,7 +28,6 @@ templates:
       - Suits
       - The Flash
       - The Good Fight
-      - The Walking Dead
       - Tosh.0
       - True Detective
       - Westworld
